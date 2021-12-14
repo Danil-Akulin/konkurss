@@ -1,5 +1,11 @@
 <?php
-require_once ('conf.php');
+require('conf.php');
+session_start();
+if (!isset($_SESSION['tuvastamine'])) {
+    header('Location: loginAB.php');
+    exit();
+}
+
 global $yhendus;
 // punktide lisamine UPDATE
 if(isset($_REQUEST['punkt'])){
@@ -26,10 +32,14 @@ UPDATE konkurss SET kommentaar=CONCAT(kommentaar, ?) WHERE id=?");
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+<form action="logout.php" method="post">
+    <input type="submit" value=" Logi välja" name="logout" class="b1">
+    <br><br>
+</form>
 <nav>
     <a href="haldus.php">Administreerimise leht</a>
     <a href="konkurss.php">Kasutaja leht</a>
-    <a href="link.php">Git - Hub</a>
+    <a href="https://github.com/Danil-Akulin/konkurss">Git - Hub</a>
 </nav>
 <h1>Fotokonkurss ""</h1>
 <?php
